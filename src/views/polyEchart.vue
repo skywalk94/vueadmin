@@ -1,36 +1,27 @@
 <template>
-  <div class="box">
-    <el-tabs v-model="activeName">
-      <el-tab-pane label="折线图" name="1">
-        <div class="chartBox">
-          <div id="polyLineChart" style="width:100%,height:100%"></div>
-        </div>
-      </el-tab-pane>
-      <el-tab-pane label="配置管理" name="2">配置管理</el-tab-pane>
-      <el-tab-pane label="角色管理" name="3">角色管理</el-tab-pane>
-      <el-tab-pane label="定时任务补偿" name="4">定时任务补偿</el-tab-pane>
-    </el-tabs>
+  <div class="chartBox">
+    <div id="polyChart" style="width:100%,height:100%"></div>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-      activeName: "1"
-    };
+    return {};
   },
   mounted() {
-    this.polyLine();
+    this.getPolyChart();
   },
   methods: {
-    polyLine() {
-      var myChart = this.$echarts.init(
-        document.getElementById("polyLineChart")
-      );
+    getPolyChart() {
+      var myChart = this.$echarts.init(document.getElementById("polyChart"));
       var option = {
         legend: {
-          data: ["vue", "react", "angular"]
+          bottom: "0",
+          data: ["vue", "react", "angular"],
+          icon: "circle",
+          itemWidth: 20,
+          itemHeight: 20
         },
         color: ["#67C23A", "#E6A23C", "#F56C6C"],
         tooltip: {
@@ -44,10 +35,22 @@ export default {
         },
         xAxis: {
           type: "category",
-          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          }
         },
         yAxis: {
-          type: "value"
+          type: "value",
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          }
         },
         series: [
           {
@@ -84,18 +87,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.box {
-  padding: 30px;
-  box-sizing: border-box;
-}
-.el-tabs {
-  width: 100%;
-}
 .chartBox {
   width: 100%;
-  height: 600px;
+  height: 100vh;
 }
-#polyLineChart {
+
+#polyChart {
   width: 100%;
   height: 100%;
 }

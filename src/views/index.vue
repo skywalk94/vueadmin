@@ -6,24 +6,21 @@
           <i class="el-icon-orange"></i>
           <span slot="title">首页</span>
         </el-menu-item>
+        <el-menu-item index="/table" @click="skipPath('./table')">
+          <i class="el-icon-s-order"></i>
+          <span slot="title">table表格</span>
+        </el-menu-item>
+        <el-menu-item index="/vueRippleDirective" @click="skipPath('./vueRippleDirective')">
+          <i class="el-icon-coffee-cup"></i>
+          <span slot="title">vue-ripple-directive</span>
+        </el-menu-item>
         <el-submenu index="2">
           <template slot="title">
-            <i class="el-icon-help"></i>
-            <span>组件</span>
+            <i class="el-icon-s-data"></i>
+            <span>echart图表</span>
           </template>
-          <el-menu-item-group>
-            <span slot="title">内置组件</span>
-            <el-menu-item index="/table" @click="skipPath('./table')">table表格</el-menu-item>
-            <el-menu-item index="/carousel" @click="skipPath('./carousel')">carousel走马灯</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group>
-            <span slot="title">外置组件</span>
-            <el-menu-item
-              index="/vueRippleDirective"
-              @click="skipPath('./vueRippleDirective')"
-            >vue-ripple-directive</el-menu-item>
-            <el-menu-item index="/echarts" @click="skipPath('./echarts')">echarts</el-menu-item>
-          </el-menu-item-group>
+          <el-menu-item index="/polyEchart" @click="skipPath('./polyEchart')">折线图</el-menu-item>
+          <el-menu-item index="/mixEchart" @click="skipPath('./mixEchart')">折线柱状混合图</el-menu-item>
         </el-submenu>
       </el-menu>
     </div>

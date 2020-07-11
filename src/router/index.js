@@ -14,26 +14,23 @@ const routes = [{
     title: '首页'
   },
   children: [{
-      path: "/vueRippleDirective",
-      name: "vueRippleDirective",
-      component: resolve => require(['@/views/vueRippleDirective'], resolve),
-    }, {
-      path: "/carousel",
-      name: "carousel",
-      component: resolve => require(['@/views/carousel'], resolve),
-    },
-    {
-      path: "/echarts",
-      name: "echarts",
-      component: resolve => require(['@/views/echarts'], resolve),
-    },
-    {
-      path: "/table",
-      name: "table",
-      component: resolve => require(['@/views/table'], resolve),
-    },
-  ]
-}, ]
+    path: "/table",
+    name: "table",
+    component: resolve => require(['@/views/table'], resolve),
+  }, {
+    path: "/vueRippleDirective",
+    name: "vueRippleDirective",
+    component: resolve => require(['@/views/vueRippleDirective'], resolve),
+  }, {
+    path: "/polyEchart",
+    name: "polyEchart",
+    component: resolve => require(['@/views/polyEchart'], resolve),
+  }, {
+    path: "/mixEchart",
+    name: "mixEchart",
+    component: resolve => require(['@/views/mixEchart'], resolve),
+  }, ]
+}]
 
 const router = new VueRouter({
   routes
