@@ -13,6 +13,8 @@ Ripple.color = 'rgba(0, 0, 0, 0.2)';
 
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
+import china from 'echarts/map/json/china.json'
+echarts.registerMap('china', china)
 
 Vue.config.productionTip = false
 new Vue({

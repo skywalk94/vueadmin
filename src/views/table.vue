@@ -80,7 +80,13 @@ export default {
   mounted() {},
   methods: {
     deleteRow(index) {
-      this.tableData.splice(index, 1);
+      this.$confirm("确认是否删除该信息?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        this.tableData.splice(index, 1);
+      });
     },
     handleSizeChange: function(size) {
       this.pagesize = size;
