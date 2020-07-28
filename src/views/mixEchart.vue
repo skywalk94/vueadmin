@@ -22,12 +22,12 @@ export default {
           top: "20",
           textStyle: {
             color: "#fff",
-            fontSize: "22"
+            fontSize: "22",
           },
           subtextStyle: {
             color: "#90979c",
-            fontSize: "16"
-          }
+            fontSize: "16",
+          },
         },
         color: ["#00D2C9", "#FF9E8C", "#FCE630"],
         backgroundColor: "#344B58",
@@ -36,21 +36,21 @@ export default {
           axisPointer: {
             type: "cross",
             label: {
-              backgroundColor: "#409EFF"
-            }
-          }
+              backgroundColor: "#409EFF",
+            },
+          },
         },
 
         legend: {
           x: "5%",
           top: "10%",
           textStyle: {
-            color: "#90979c"
+            color: "#90979c",
           },
           icon: "circle",
           itemWidth: 20,
           itemHeight: 20,
-          data: ["vue", "react", "angular"]
+          data: ["vue", "react", "angular"],
         },
 
         grid: {
@@ -60,8 +60,8 @@ export default {
           top: 150,
           bottom: 95,
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
 
         xAxis: [
@@ -70,56 +70,56 @@ export default {
             data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
             axisLine: {
               lineStyle: {
-                color: "#90979c"
-              }
+                color: "#90979c",
+              },
             },
             axisTick: {
-              show: false
-            }
-          }
+              show: false,
+            },
+          },
         ],
 
         yAxis: [
           {
             type: "value",
             splitLine: {
-              show: false
+              show: false,
             },
             axisLine: {
               lineStyle: {
-                color: "#90979c"
-              }
+                color: "#90979c",
+              },
             },
             axisTick: {
-              show: false
+              show: false,
             },
             axisLabel: {
-              interval: 0
+              interval: 0,
             },
             splitArea: {
-              show: false
-            }
+              show: false,
+            },
           },
           {
             type: "value",
             splitLine: {
-              show: false
+              show: false,
             },
             axisLine: {
               lineStyle: {
-                color: "#90979c"
-              }
+                color: "#90979c",
+              },
             },
             axisTick: {
-              show: false
+              show: false,
             },
             axisLabel: {
-              interval: 0
+              interval: 0,
             },
             splitArea: {
-              show: false
-            }
-          }
+              show: false,
+            },
+          },
         ],
 
         series: [
@@ -131,9 +131,9 @@ export default {
               normal: {
                 show: true,
                 color: "#90979c",
-                position: "inside"
-              }
-            }
+                position: "inside",
+              },
+            },
           },
           {
             name: "react",
@@ -143,9 +143,9 @@ export default {
               normal: {
                 show: true,
                 color: "#90979c",
-                position: "inside"
-              }
-            }
+                position: "inside",
+              },
+            },
           },
           {
             name: "angular",
@@ -156,19 +156,19 @@ export default {
               normal: {
                 show: true,
                 color: "#FCE630",
-                position: "top"
-              }
-            }
-          }
+                position: "top",
+              },
+            },
+          },
         ],
-        dataZoom: [{ type: "inside" }]
+        dataZoom: [{ type: "inside" }],
       };
       myChart.setOption(option);
       window.onresize = () => {
         myChart.resize();
       };
-    }
-  }
+    },
+  },
 };
 </script>
 

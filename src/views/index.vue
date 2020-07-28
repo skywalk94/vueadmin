@@ -24,11 +24,8 @@
         </el-submenu>
       </el-menu>
     </div>
-    <div id="mainRight">
-      <div id="mainUpper"></div>
-      <div id="main">
-        <router-view />
-      </div>
+    <div id="main">
+      <router-view />
     </div>
   </div>
 </template>
@@ -42,28 +39,33 @@ export default {
   methods: {
     skipPath(e) {
       this.$router.push({
-        path: "." + e
+        path: "." + e,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="less" scoped>
 #mainbox {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .menuNav {
+  width: 260px;
   background: #304156;
 }
 
-#mainUpper {
-  width: 100%;
+::-webkit-scrollbar {
+  display: none;
 }
 
-#mainRight,
+.menuNav,
+#main {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 #main {
   width: 100%;
   height: 100%;

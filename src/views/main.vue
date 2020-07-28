@@ -1,45 +1,22 @@
 <template>
   <div class="row">
-    <img
-      src="https://sucai.suoluomei.cn/sucai_zs/images/20200711135449-b3a2a02b62999fa7ebcebcd9fad537d.jpg"
-      alt
-    />
+    <iframe src="https://blog.csdn.net/ak852369/" frameborder="0"></iframe>
   </div>
 </template>
 
 <script>
-import scrollReveal from "scrollreveal";
 export default {
   data() {
-    return {
-      scrollReveal: scrollReveal()
-    };
+    return {};
   },
-  mounted() {
-    this.get();
-  },
-  methods: {
-    get() {
-      this.scrollReveal.reveal(".row img", {
-        duration: 1000,
-        reset: false,
-        mobile: false,
-        easing: "linear",
-        scale: 0.8
-      });
-    }
-  }
+  mounted() {},
+  methods: {},
 };
 </script>
 
 <style lang="less" scoped>
-.row {
+.row iframe {
   width: 100%;
-  height: 100%;
-}
-
-.row img {
-  width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 </style>
