@@ -2,26 +2,28 @@
   <div id="mainbox">
     <div class="menuNav">
       <el-menu :default-active="$route.path" background-color="#304156" text-color="#BFCBD9">
-        <el-menu-item index="/main" @click="skipPath('/main')">
-          <i class="el-icon-orange"></i>
-          <span slot="title">首页</span>
-        </el-menu-item>
-        <el-menu-item index="/table" @click="skipPath('/table')">
-          <i class="el-icon-s-order"></i>
-          <span slot="title">table表格</span>
-        </el-menu-item>
-        <el-menu-item index="/vueRippleDirective" @click="skipPath('/vueRippleDirective')">
-          <i class="el-icon-coffee-cup"></i>
-          <span slot="title">vue-ripple-directive</span>
-        </el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">
-            <i class="el-icon-s-data"></i>
-            <span>echart图表</span>
+        <div v-for="(item,index) in menuList" :key="index">
+          <template v-if="!item.childList">
+            <el-menu-item :index="item.path" @click="skipPath(item.path)">
+              <i :class="item.icon"></i>
+              <span slot="title">{{item.title}}</span>
+            </el-menu-item>
           </template>
-          <el-menu-item index="/mapEchart" @click="skipPath('/mapEchart')">中国地图</el-menu-item>
-          <el-menu-item index="/mixEchart" @click="skipPath('/mixEchart')">折线柱状混合图</el-menu-item>
-        </el-submenu>
+          <template v-if="item.childList">
+            <el-submenu index="index">
+              <template slot="title">
+                <i :class="item.icon"></i>
+                <span>{{item.title}}</span>
+              </template>
+              <el-menu-item
+                v-for="(row , i) in item.childList"
+                :key="i"
+                :index="row.path"
+                @click="skipPath(row.path)"
+              >{{item.title}}</el-menu-item>
+            </el-submenu>
+          </template>
+        </div>
       </el-menu>
     </div>
     <div id="main">
@@ -33,7 +35,39 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      menuList: [
+        {
+          title: "首页",
+          path: "/main",
+          icon: "el-icon-orange",
+        },
+        {
+          title: "table表格",
+          path: "/table",
+          icon: "el-icon-s-order",
+        },
+        {
+          title: "vue-ripple-directive",
+          path: "/vueRippleDirective",
+          icon: "el-icon-coffee-cup",
+        },
+        {
+          title: "echart图表",
+          icon: "el-icon-s-data",
+          childList: [
+            {
+              title: "中国地图",
+              path: "/mapEchart",
+            },
+            {
+              title: "折线柱状混合图",
+              path: "/mixEchart",
+            },
+          ],
+        },
+      ],
+    };
   },
   mounted() {},
   methods: {

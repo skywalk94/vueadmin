@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="box">
     <iframe src="https://blog.csdn.net/ak852369/" frameborder="0"></iframe>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.row iframe {
+.box iframe {
   width: 100%;
   height: 100vh;
 }
