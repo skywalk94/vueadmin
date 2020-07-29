@@ -5,6 +5,11 @@
 </template>
 
 <script>
+import Vue from "vue";
+import echarts from "echarts";
+Vue.prototype.$echarts = echarts;
+import china from "echarts/map/json/china.json";
+echarts.registerMap("china", china);
 export default {
   data() {
     return {};
@@ -49,7 +54,7 @@ export default {
         { name: "台湾", value: this.getData() },
         { name: "香港", value: this.getData() },
         { name: "澳门", value: this.getData() },
-        { name: "南海诸岛", value: this.getData() }
+        { name: "南海诸岛", value: this.getData() },
       ];
       this.getMapChart(cityData);
     },
@@ -65,32 +70,32 @@ export default {
           top: "20",
           textStyle: {
             color: "#fff",
-            fontSize: "22"
+            fontSize: "22",
           },
           subtextStyle: {
             color: "#90979c",
-            fontSize: "16"
-          }
+            fontSize: "16",
+          },
         },
         backgroundColor: "#344B58",
         tooltip: {
           textStyle: {
-            color: "#fff"
-          }
+            color: "#fff",
+          },
         },
         visualMap: [
           {
             type: "piecewise",
             pieces: [{ gt: 500 }, { gt: 250, lte: 500 }, { gte: 0, lte: 250 }],
             textStyle: {
-              color: "#90979c"
+              color: "#90979c",
             },
             inRange: {
-              color: ["#00D2C9", "#FF9E8C", "#FCE630"]
+              color: ["#00D2C9", "#FF9E8C", "#FCE630"],
             },
             top: "100",
-            left: "20"
-          }
+            left: "20",
+          },
         ],
         series: [
           {
@@ -102,31 +107,31 @@ export default {
               normal: {
                 show: true,
                 formatter: "{b}\n{c}",
-                color: "#90979c"
-              }
+                color: "#90979c",
+              },
             },
             itemStyle: {
-              borderColor: "#fff"
+              borderColor: "#fff",
             },
             emphasis: {
               label: {
-                color: "#fff"
+                color: "#fff",
               },
               itemStyle: {
-                areaColor: "#909399"
+                areaColor: "#909399",
               },
-              show: true
+              show: true,
             },
-            data: cityData
-          }
-        ]
+            data: cityData,
+          },
+        ],
       };
       myChart.setOption(option);
       window.onresize = () => {
         myChart.resize();
       };
-    }
-  }
+    },
+  },
 };
 </script>
 

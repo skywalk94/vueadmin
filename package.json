@@ -8,9 +8,11 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "animate.css": "^4.1.0",
     "core-js": "^3.4.0",
     "echarts": "^4.8.0",
     "element-ui": "^2.13.2",
+    "screenfull": "^5.0.2",
     "vue": "^2.6.11",
     "vue-ripple-directive": "^2.0.1",
     "vue-router": "^3.2.0",
