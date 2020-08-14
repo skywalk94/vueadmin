@@ -16,7 +16,11 @@
             />
           </div>
         </el-tooltip>
-        <div class="adminAvatar animate__animated animate__bounce">
+        <div
+          class="adminAvatar animate__animated animate__infinite"
+          :class="isAnimate ? 'animate__pulse' : ''"
+          @click="aniAvatar()"
+        >
           <img src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg" alt />
         </div>
       </div>
@@ -93,6 +97,7 @@ export default {
         },
       ],
       isFullscreen: false,
+      isAnimate: false,
     };
   },
   mounted() {},
@@ -103,9 +108,15 @@ export default {
       });
     },
 
+    // 全屏
     toggleFull() {
       this.isFullscreen = !this.isFullscreen;
       screenfull.toggle();
+    },
+
+    // 头像动画
+    aniAvatar() {
+      this.isAnimate = !this.isAnimate;
     },
   },
 };

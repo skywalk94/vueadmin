@@ -39,62 +39,45 @@
 export default {
   data() {
     return {
-      tableData: [
-        {
+      tableData: [],
+      currentPage: 1,
+      pagesize: 10,
+    };
+  },
+  mounted() {
+    this.moreData();
+  },
+  methods: {
+    moreData() {
+      var list = [];
+      for (let i = 0; i < 50; i++) {
+        list.push({
           date: "2016-05-02",
-          name: "王小虎",
+          name: "王小虎" + i,
           province: "上海",
           city: "普陀区",
           address: "上海市普陀区金沙江路 1518 弄",
-          zip: 200333
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1517 弄",
-          zip: 200333
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1519 弄",
-          zip: 200333
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          province: "上海",
-          city: "普陀区",
-          address: "上海市普陀区金沙江路 1516 弄",
-          zip: 200333
-        }
-      ],
-      currentPage: 1,
-      pagesize: 10
-    };
-  },
-  mounted() {},
-  methods: {
+          zip: 200333,
+        });
+      }
+      this.tableData = list;
+    },
     deleteRow(index) {
       this.$confirm("确认是否删除该信息?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "warning"
+        type: "warning",
       }).then(() => {
         this.tableData.splice(index, 1);
       });
     },
-    handleSizeChange: function(size) {
+    handleSizeChange: function (size) {
       this.pagesize = size;
     },
-    handleCurrentChange: function(currentPage) {
+    handleCurrentChange: function (currentPage) {
       this.currentPage = currentPage;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
