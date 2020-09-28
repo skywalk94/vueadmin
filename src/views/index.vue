@@ -6,12 +6,16 @@
         <el-tooltip
           class="item"
           effect="dark"
-          :content="isFullscreen?'取消全屏':'全屏'"
+          :content="isFullscreen ? '取消全屏' : '全屏'"
           placement="bottom"
         >
           <div class="adminFull" @click="toggleFull()">
             <img
-              :src="isFullscreen ? 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-2.png' : 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-1.png' "
+              :src="
+                isFullscreen
+                  ? 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-2.png'
+                  : 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-1.png'
+              "
               alt
             />
           </div>
@@ -21,32 +25,40 @@
           :class="isAnimate ? 'animate__pulse' : ''"
           @click="aniAvatar()"
         >
-          <img src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg" alt />
+          <img
+            src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg"
+            alt
+          />
         </div>
       </div>
     </div>
     <div class="adminMainBox">
       <div class="adminMenuNav">
-        <el-menu :default-active="$route.path" background-color="#304156" text-color="#BFCBD9">
-          <div v-for="(item,index) in menuList" :key="index">
+        <el-menu
+          :default-active="$route.path"
+          background-color="#304156"
+          text-color="#BFCBD9"
+        >
+          <div v-for="(item, index) in menuList" :key="index">
             <template v-if="!item.childList">
               <el-menu-item :index="item.path" @click="skipPath(item.path)">
                 <i :class="item.icon"></i>
-                <span slot="title">{{item.title}}</span>
+                <span slot="title">{{ item.title }}</span>
               </el-menu-item>
             </template>
             <template v-if="item.childList">
               <el-submenu index="index">
                 <template slot="title">
                   <i :class="item.icon"></i>
-                  <span>{{item.title}}</span>
+                  <span>{{ item.title }}</span>
                 </template>
                 <el-menu-item
-                  v-for="(row , i) in item.childList"
+                  v-for="(row, i) in item.childList"
                   :key="i"
                   :index="row.path"
                   @click="skipPath(row.path)"
-                >{{row.title}}</el-menu-item>
+                  >{{ row.title }}</el-menu-item
+                >
               </el-submenu>
             </template>
           </div>
@@ -69,7 +81,7 @@ export default {
         {
           title: "首页",
           path: "/main",
-          icon: "el-icon-orange",
+          icon: "el-icon-s-home",
         },
         {
           title: "table表格",
