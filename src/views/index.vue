@@ -136,7 +136,21 @@ export default {
                   title: "table表格",
                   path: "/table",
                 },
+                {
+                  title: "地址联动",
+                  path: "/cascaderArea",
+                },
               ],
+            },
+          ],
+        },
+        {
+          title: "抽奖",
+          icon: "el-icon-orange",
+          childList: [
+            {
+              title: "九宫格抽奖",
+              path: "/gridLottery",
             },
           ],
         },

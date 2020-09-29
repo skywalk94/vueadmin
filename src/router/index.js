@@ -58,6 +58,22 @@ const routes = [{
         title: '列表拖拽'
       },
     },
+    {
+      path: "/gridLottery",
+      name: "gridLottery",
+      component: resolve => require(['@/views/gridLottery'], resolve),
+      meta: {
+        title: '九宫格抽奖'
+      },
+    },
+    {
+      path: "/cascaderArea",
+      name: "cascaderArea",
+      component: resolve => require(['@/views/cascaderArea'], resolve),
+      meta: {
+        title: '地址联动'
+      },
+    },
   ]
 }]
 

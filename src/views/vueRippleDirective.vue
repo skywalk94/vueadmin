@@ -29,16 +29,14 @@ export default {
 }
 
 .rippleBtn {
-  width: 600px;
-  height: 600px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   border: 2px solid #909399;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 30px;
-  -moz-user-select: none;
-  -khtml-user-select: none;
   user-select: none;
   cursor: pointer;
 }
