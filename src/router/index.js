@@ -15,41 +15,50 @@ const routes = [{
     title: '首页'
   },
   children: [{
-    path: "/main",
-    name: "main",
-    component: resolve => require(['@/views/main'], resolve),
-    meta: {
-      title: '首页'
+      path: "/main",
+      name: "main",
+      component: resolve => require(['@/views/main'], resolve),
+      meta: {
+        title: '首页'
+      },
+    }, {
+      path: "/table",
+      name: "table",
+      component: resolve => require(['@/views/table'], resolve),
+      meta: {
+        title: '表格'
+      },
+    }, {
+      path: "/vueRippleDirective",
+      name: "vueRippleDirective",
+      component: resolve => require(['@/views/vueRippleDirective'], resolve),
+      meta: {
+        title: '水波纹'
+      },
+    }, {
+      path: "/mapEchart",
+      name: "mapEchart",
+      component: resolve => require(['@/views/mapEchart'], resolve),
+      meta: {
+        title: '中国地图'
+      },
+    }, {
+      path: "/mixEchart",
+      name: "mixEchart",
+      component: resolve => require(['@/views/mixEchart'], resolve),
+      meta: {
+        title: '混合图表'
+      },
     },
-  }, {
-    path: "/table",
-    name: "table",
-    component: resolve => require(['@/views/table'], resolve),
-    meta: {
-      title: '表格'
+    {
+      path: "/vueDraggable",
+      name: "vueDraggable",
+      component: resolve => require(['@/views/vueDraggable'], resolve),
+      meta: {
+        title: '列表拖拽'
+      },
     },
-  }, {
-    path: "/vueRippleDirective",
-    name: "vueRippleDirective",
-    component: resolve => require(['@/views/vueRippleDirective'], resolve),
-    meta: {
-      title: '水波纹'
-    },
-  }, {
-    path: "/mapEchart",
-    name: "mapEchart",
-    component: resolve => require(['@/views/mapEchart'], resolve),
-    meta: {
-      title: '中国地图'
-    },
-  }, {
-    path: "/mixEchart",
-    name: "mixEchart",
-    component: resolve => require(['@/views/mixEchart'], resolve),
-    meta: {
-      title: '混合图表'
-    },
-  }, ]
+  ]
 }]
 
 const router = new VueRouter({

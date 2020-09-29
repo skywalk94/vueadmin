@@ -38,30 +38,46 @@
           :default-active="$route.path"
           background-color="#304156"
           text-color="#BFCBD9"
+          v-for="(item, index) in menuList"
+          :key="index"
         >
-          <div v-for="(item, index) in menuList" :key="index">
-            <template v-if="!item.childList">
-              <el-menu-item :index="item.path" @click="skipPath(item.path)">
-                <i :class="item.icon"></i>
-                <span slot="title">{{ item.title }}</span>
+          <el-menu-item
+            :index="item.path"
+            v-if="!item.hasOwnProperty('childList')"
+            @click="skipPath(item.path)"
+          >
+            <i :class="item.icon"></i>
+            <span slot="title">{{ item.title }}</span>
+          </el-menu-item>
+          <el-submenu index="index" v-if="item.hasOwnProperty('childList')">
+            <template slot="title">
+              <i :class="item.icon"></i>
+              <span>{{ item.title }}</span>
+            </template>
+            <div v-for="(row, i) in item.childList" :key="i">
+              <el-menu-item
+                :index="row.path"
+                v-if="row.path"
+                @click="skipPath(row.path)"
+              >
+                {{ row.title }}
               </el-menu-item>
-            </template>
-            <template v-if="item.childList">
-              <el-submenu index="index">
-                <template slot="title">
-                  <i :class="item.icon"></i>
-                  <span>{{ item.title }}</span>
-                </template>
+              <el-submenu
+                :index="index + '-' + i"
+                v-if="row.hasOwnProperty('sunList')"
+              >
+                <template slot="title">{{ row.title }}</template>
                 <el-menu-item
-                  v-for="(row, i) in item.childList"
-                  :key="i"
-                  :index="row.path"
-                  @click="skipPath(row.path)"
-                  >{{ row.title }}</el-menu-item
+                  v-for="(col, j) in row.sunList"
+                  :key="j"
+                  :index="col.path"
+                  @click="skipPath(col.path)"
                 >
+                  {{ col.title }}
+                </el-menu-item>
               </el-submenu>
-            </template>
-          </div>
+            </div>
+          </el-submenu>
         </el-menu>
       </div>
       <div class="adminMain">
@@ -73,7 +89,6 @@
 
 <script>
 import screenfull from "screenfull";
-
 export default {
   data() {
     return {
@@ -82,16 +97,6 @@ export default {
           title: "首页",
           path: "/main",
           icon: "el-icon-s-home",
-        },
-        {
-          title: "table表格",
-          path: "/table",
-          icon: "el-icon-s-order",
-        },
-        {
-          title: "vue-ripple-directive",
-          path: "/vueRippleDirective",
-          icon: "el-icon-coffee-cup",
         },
         {
           title: "echart图表",
@@ -104,6 +109,34 @@ export default {
             {
               title: "折线柱状混合图",
               path: "/mixEchart",
+            },
+          ],
+        },
+        {
+          title: "组件",
+          icon: "el-icon-aim",
+          childList: [
+            {
+              title: "外部组件",
+              sunList: [
+                {
+                  title: "列表拖拽",
+                  path: "/vueDraggable",
+                },
+                {
+                  title: "水波纹",
+                  path: "/vueRippleDirective",
+                },
+              ],
+            },
+            {
+              title: "内部组件",
+              sunList: [
+                {
+                  title: "table表格",
+                  path: "/table",
+                },
+              ],
             },
           ],
         },
@@ -174,6 +207,7 @@ export default {
   border-radius: 50%;
   overflow: hidden;
 }
+
 .adminMainBox {
   display: flex;
   height: 94vh;
