@@ -49,7 +49,7 @@
             <i :class="item.icon"></i>
             <span slot="title">{{ item.title }}</span>
           </el-menu-item>
-          <el-submenu index="index" v-if="item.hasOwnProperty('childList')">
+          <el-submenu :index="index" v-if="item.hasOwnProperty('childList')">
             <template slot="title">
               <i :class="item.icon"></i>
               <span>{{ item.title }}</span>
@@ -151,6 +151,10 @@ export default {
             {
               title: "九宫格抽奖",
               path: "/gridLottery",
+            },
+            {
+              title: "大转盘抽奖",
+              path: "/plateLottery",
             },
           ],
         },

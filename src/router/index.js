@@ -67,6 +67,14 @@ const routes = [{
       },
     },
     {
+      path: "/plateLottery",
+      name: "plateLottery",
+      component: resolve => require(['@/views/plateLottery'], resolve),
+      meta: {
+        title: '大转盘抽奖'
+      },
+    },
+    {
       path: "/cascaderArea",
       name: "cascaderArea",
       component: resolve => require(['@/views/cascaderArea'], resolve),
