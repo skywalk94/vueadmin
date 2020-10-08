@@ -29,6 +29,14 @@ export default {
   },
   methods: {
     handleChange() {
+      this.$alert(
+        this.selectedThree +
+          " " +
+          this.$refs.three.getCheckedNodes()[0].pathLabels,
+        {
+          confirmButtonText: "确定",
+        }
+      );
       console.log(this.selectedThree);
       console.log(this.$refs.three.getCheckedNodes()[0].pathLabels);
     },

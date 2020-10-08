@@ -49,7 +49,7 @@
             <i :class="item.icon"></i>
             <span slot="title">{{ item.title }}</span>
           </el-menu-item>
-          <el-submenu :index="index" v-if="item.hasOwnProperty('childList')">
+          <el-submenu index="index" v-if="item.hasOwnProperty('childList')">
             <template slot="title">
               <i :class="item.icon"></i>
               <span>{{ item.title }}</span>
@@ -130,7 +130,7 @@ export default {
               ],
             },
             {
-              title: "内部组件",
+              title: "element组件",
               sunList: [
                 {
                   title: "table表格",
