@@ -127,6 +127,10 @@ export default {
                   title: "水波纹",
                   path: "/vueRippleDirective",
                 },
+                {
+                  title: "裁剪图片",
+                  path: "/vueCropper",
+                },
               ],
             },
             {

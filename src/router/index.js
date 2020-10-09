@@ -82,6 +82,14 @@ const routes = [{
         title: '地址联动'
       },
     },
+    {
+      path: "/vueCropper",
+      name: "vueCropper",
+      component: resolve => require(['@/views/vueCropper'], resolve),
+      meta: {
+        title: '裁剪图片'
+      },
+    },
   ]
 }]
 
