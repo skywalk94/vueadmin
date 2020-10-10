@@ -1,87 +1,109 @@
 <template>
-  <div id="admin">
-    <div class="adminUpper">
-      <div class="adminTitle">vue后台管理系统</div>
-      <div class="adminInfo">
-        <el-tooltip
-          class="item"
-          effect="dark"
-          :content="isFullscreen ? '取消全屏' : '全屏'"
-          placement="bottom"
+  <div class="adminMainBox">
+    <div class="adminMenuNav" :style="{ width: menuWidth + 'px' }">
+      <el-menu
+        :default-active="$route.path"
+        background-color="#304156"
+        text-color="#BFCBD9"
+        :collapse="isCollapse"
+        v-for="(item, index) in menuList"
+        :key="index"
+      >
+        <el-menu-item
+          :index="item.path"
+          v-if="!item.hasOwnProperty('childList')"
+          @click="skipPath(item.path)"
         >
-          <div class="adminFull" @click="toggleFull()">
-            <img
-              :src="
-                isFullscreen
-                  ? 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-2.png'
-                  : 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-1.png'
-              "
-              alt
-            />
+          <i :class="item.icon"></i>
+          <span slot="title">{{ item.title }}</span>
+        </el-menu-item>
+        <el-submenu index="index" v-if="item.hasOwnProperty('childList')">
+          <template slot="title">
+            <i :class="item.icon"></i>
+            <span>{{ item.title }}</span>
+          </template>
+          <div v-for="(row, i) in item.childList" :key="i">
+            <el-menu-item
+              :index="row.path"
+              v-if="row.path"
+              @click="skipPath(row.path)"
+            >
+              {{ row.title }}
+            </el-menu-item>
+            <el-submenu
+              :index="index + '-' + i"
+              v-if="row.hasOwnProperty('sunList')"
+            >
+              <template slot="title">{{ row.title }}</template>
+              <el-menu-item
+                v-for="(col, j) in row.sunList"
+                :key="j"
+                :index="col.path"
+                @click="skipPath(col.path)"
+              >
+                {{ col.title }}
+              </el-menu-item>
+            </el-submenu>
           </div>
-        </el-tooltip>
-        <div
-          class="adminAvatar animate__animated animate__infinite"
-          :class="isAnimate ? 'animate__pulse' : ''"
-          @click="aniAvatar()"
-        >
-          <img
-            src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg"
-            alt
-          />
+        </el-submenu>
+      </el-menu>
+    </div>
+    <div class="adminMain" :style="{ 'margin-left': menuWidth + 'px' }">
+      <div class="adminUpper">
+        <div class="adminHead">
+          <div class="adminTitle">vue后台管理系统</div>
+          <div class="adminInfo">
+            <el-tooltip
+              class="item"
+              effect="dark"
+              :content="isFullscreen ? '取消全屏' : '全屏'"
+              placement="bottom"
+            >
+              <div class="adminFull" @click="toggleFull()">
+                <img
+                  :src="
+                    isFullscreen
+                      ? 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-2.png'
+                      : 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-1.png'
+                  "
+                  alt
+                />
+              </div>
+            </el-tooltip>
+            <div
+              class="adminAvatar animate__animated animate__infinite"
+              :class="isAnimate ? 'animate__pulse' : ''"
+              @click="aniAvatar()"
+            >
+              <img
+                src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg"
+                alt
+              />
+            </div>
+          </div>
+        </div>
+        <div class="adminNav">
+          <div class="adminZoom" @click="zoomMenu()">
+            <i :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></i>
+          </div>
+          <div class="adminTag">
+            <el-tag
+              v-for="item in tagList"
+              :key="item"
+              closable
+              @close="closeTag(item)"
+            >
+              {{ tag }}
+            </el-tag>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="adminMainBox">
-      <div class="adminMenuNav">
-        <el-menu
-          :default-active="$route.path"
-          background-color="#304156"
-          text-color="#BFCBD9"
-          v-for="(item, index) in menuList"
-          :key="index"
-        >
-          <el-menu-item
-            :index="item.path"
-            v-if="!item.hasOwnProperty('childList')"
-            @click="skipPath(item.path)"
-          >
-            <i :class="item.icon"></i>
-            <span slot="title">{{ item.title }}</span>
-          </el-menu-item>
-          <el-submenu index="index" v-if="item.hasOwnProperty('childList')">
-            <template slot="title">
-              <i :class="item.icon"></i>
-              <span>{{ item.title }}</span>
-            </template>
-            <div v-for="(row, i) in item.childList" :key="i">
-              <el-menu-item
-                :index="row.path"
-                v-if="row.path"
-                @click="skipPath(row.path)"
-              >
-                {{ row.title }}
-              </el-menu-item>
-              <el-submenu
-                :index="index + '-' + i"
-                v-if="row.hasOwnProperty('sunList')"
-              >
-                <template slot="title">{{ row.title }}</template>
-                <el-menu-item
-                  v-for="(col, j) in row.sunList"
-                  :key="j"
-                  :index="col.path"
-                  @click="skipPath(col.path)"
-                >
-                  {{ col.title }}
-                </el-menu-item>
-              </el-submenu>
-            </div>
-          </el-submenu>
-        </el-menu>
-      </div>
-      <div class="adminMain">
-        <router-view />
+      <div class="adminView">
+        <transition name="move" mode="out-in">
+          <keep-alive>
+            <router-view />
+          </keep-alive>
+        </transition>
       </div>
     </div>
   </div>
@@ -163,8 +185,11 @@ export default {
           ],
         },
       ],
+      tagList: [],
+      isCollapse: false,
       isFullscreen: false,
       isAnimate: false,
+      menuWidth: 210,
     };
   },
   mounted() {},
@@ -185,20 +210,60 @@ export default {
     aniAvatar() {
       this.isAnimate = !this.isAnimate;
     },
+
+    // 缩放面板
+    zoomMenu() {
+      if (this.isCollapse) {
+        this.menuWidth = 210;
+      } else {
+        this.menuWidth = 63;
+      }
+      this.isCollapse = !this.isCollapse;
+    },
+
+    closeTag(item) {},
   },
 };
 </script>
 
 <style lang="less" scoped>
+.adminMenuNav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 210px;
+  height: 100%;
+  background: #304156;
+  overflow-y: auto;
+  transition: all 0.3s;
+}
+.adminMenuNav .el-menu {
+  border-right: unset;
+}
+.adminMain {
+  margin-left: 210px;
+  transition: all 0.3s;
+}
+
 .adminUpper {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   width: 100%;
-  height: 6vh;
-  background: #f5f5f5;
+  background: #fff;
+  padding: 2px 0;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+
+.adminHead {
+  padding: 5px 20px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  box-sizing: border-box;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 }
 
 .adminInfo {
@@ -230,28 +295,22 @@ export default {
   overflow: hidden;
 }
 
-.adminMainBox {
-  display: flex;
-  height: 94vh;
+.adminZoom {
+  font-size: 24px;
+  cursor: pointer;
+}
+.adminNav {
+  padding: 5px 20px;
+  box-sizing: border-box;
 }
 
-.adminMenuNav {
-  width: 260px;
-  background: #304156;
-  overflow-x: hidden;
+.move-enter-active,
+.move-leave-active {
+  transition: opacity 0.3s;
 }
 
-.adminMain {
-  width: 100%;
-  height: 100%;
-}
-
-.adminMenuNav,
-.adminMain {
-  overflow-y: auto;
-}
-
-::-webkit-scrollbar {
-  display: none;
+.move-enter,
+.move-leave {
+  opacity: 0;
 }
 </style>
