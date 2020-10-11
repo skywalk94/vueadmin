@@ -1,45 +1,31 @@
 <template>
   <div class="adminMainBox">
-    <div class="adminMenuNav" :style="{ width: menuWidth + 'px' }">
+    <div
+      class="adminMenuNav"
+      :class="isMobile ? (isShow ? 'show' : 'hidden') : ''"
+      :style="{ width: isMobile ? 210 + 'px' : menuWidth + 'px' }"
+    >
       <menuNav :isCollapse="isCollapse"></menuNav>
     </div>
-    <div class="adminMain" :style="{ 'margin-left': menuWidth + 'px' }">
+    <div
+      class="adminPopBg"
+      @click="closeMenu()"
+      v-show="isShow && isMobile"
+    ></div>
+    <div
+      class="adminMain"
+      :style="{ 'margin-left': isMobile ? 0 : menuWidth + 'px' }"
+    >
       <div class="adminUpper">
-        <div class="adminHead">
-          <div class="adminTitle">vue后台管理系统</div>
-          <div class="adminInfo">
-            <el-tooltip
-              class="item"
-              effect="dark"
-              :content="isFullscreen ? '取消全屏' : '全屏'"
-              placement="bottom"
-            >
-              <div class="adminFull" @click="toggleFull()">
-                <img
-                  :src="
-                    isFullscreen
-                      ? 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-2.png'
-                      : 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-1.png'
-                  "
-                  alt
-                />
-              </div>
-            </el-tooltip>
-            <div
-              class="adminAvatar animate__animated animate__infinite"
-              :class="isAnimate ? 'animate__pulse' : ''"
-              @click="aniAvatar()"
-            >
-              <img
-                src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg"
-                alt
-              />
-            </div>
-          </div>
-        </div>
+        <infoPanel></infoPanel>
         <div class="adminNav">
-          <div class="adminZoom" @click="zoomMenu()">
-            <i :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></i>
+          <div class="adminZoom">
+            <i
+              :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
+              v-if="!isMobile"
+              @click="zoomMenu()"
+            ></i>
+            <i class="el-icon-s-unfold" v-else @click="showMenu()"></i>
           </div>
           <div class="adminTag">
             <tagNav></tagNav>
@@ -56,43 +42,63 @@
 </template>
 
 <script>
-import screenfull from "screenfull";
 import tagNav from "../component/tagNav";
+import infoPanel from "../component/infoPanel";
 import menuNav from "../component/menuNav";
 export default {
   components: {
     tagNav,
     menuNav,
+    infoPanel,
   },
   data() {
     return {
       isCollapse: false,
-      isFullscreen: false,
-      isAnimate: false,
       menuWidth: 210,
+      isMobile: false,
+      isShow: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.getClient();
+  },
   methods: {
-    // 全屏
-    toggleFull() {
-      this.isFullscreen = !this.isFullscreen;
-      screenfull.toggle();
+    // 判断来源是否为移动端
+    getClient() {
+      var viewWidth = window.innerWidth;
+      this.fitMobile(viewWidth);
+      window.onresize = (res) => {
+        viewWidth = res.target.innerWidth;
+        this.fitMobile(viewWidth);
+      };
     },
 
-    // 头像动画
-    aniAvatar() {
-      this.isAnimate = !this.isAnimate;
-    },
-
-    // 缩放面板
-    zoomMenu() {
-      if (this.isCollapse) {
-        this.menuWidth = 210;
+    // 适配移动端
+    fitMobile(width) {
+      if (width < 500) {
+        this.isCollapse = false;
+        this.isMobile = true;
+        this.isShow = false;
       } else {
-        this.menuWidth = 63;
+        this.isMobile = false;
+        this.menuWidth = this.isCollapse ? 63 : 210;
       }
+    },
+
+    // 缩放menu
+    zoomMenu() {
       this.isCollapse = !this.isCollapse;
+      this.menuWidth = this.isCollapse ? 63 : 210;
+    },
+
+    // 显示menu
+    showMenu() {
+      this.isShow = true;
+    },
+
+    // 关闭menu
+    closeMenu() {
+      this.isShow = false;
     },
   },
 };
@@ -103,12 +109,30 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 110;
   width: 210px;
   height: 100%;
   background: #304156;
   overflow-y: auto;
   transition: all 0.3s;
+}
+
+.show {
+  transform: translateX(0);
+}
+
+.hidden {
+  transform: translateX(-100%);
+}
+
+.adminPopBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 105;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .adminMain {
@@ -127,48 +151,11 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
 
-.adminHead {
-  padding: 5px 20px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-}
-
-.adminInfo {
-  display: flex;
-  align-items: center;
-}
-
-.adminTitle {
-  font-size: 24px;
-  color: #304156;
-}
-
-.adminFull {
-  width: 30px;
-  cursor: pointer;
-}
-
-.adminFull img,
-.adminAvatar img {
-  width: 100%;
-  height: 100%;
-}
-
-.adminAvatar {
-  width: 45px;
-  height: 45px;
-  margin-left: 20px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
 .adminZoom {
   font-size: 24px;
   cursor: pointer;
 }
+
 .adminNav {
   display: flex;
   align-items: center;
