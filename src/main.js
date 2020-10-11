@@ -22,9 +22,10 @@ import {
   MessageBox,
   Message,
   Cascader,
+  tag
 } from 'element-ui';
 
-Vue.use(Button).use(ButtonGroup).use(Table).use(TableColumn).use(Pagination).use(Menu).use(MenuItem).use(MenuItemGroup).use(Tooltip).use(Submenu).use(Cascader)
+Vue.use(Button).use(ButtonGroup).use(Table).use(TableColumn).use(Pagination).use(Menu).use(MenuItem).use(MenuItemGroup).use(Tooltip).use(Submenu).use(Cascader).use(tag)
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;
 Vue.prototype.$alert = MessageBox.alert;

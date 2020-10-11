@@ -1,52 +1,7 @@
 <template>
   <div class="adminMainBox">
     <div class="adminMenuNav" :style="{ width: menuWidth + 'px' }">
-      <el-menu
-        :default-active="$route.path"
-        background-color="#304156"
-        text-color="#BFCBD9"
-        :collapse="isCollapse"
-        v-for="(item, index) in menuList"
-        :key="index"
-      >
-        <el-menu-item
-          :index="item.path"
-          v-if="!item.hasOwnProperty('childList')"
-          @click="skipPath(item.path)"
-        >
-          <i :class="item.icon"></i>
-          <span slot="title">{{ item.title }}</span>
-        </el-menu-item>
-        <el-submenu index="index" v-if="item.hasOwnProperty('childList')">
-          <template slot="title">
-            <i :class="item.icon"></i>
-            <span>{{ item.title }}</span>
-          </template>
-          <div v-for="(row, i) in item.childList" :key="i">
-            <el-menu-item
-              :index="row.path"
-              v-if="row.path"
-              @click="skipPath(row.path)"
-            >
-              {{ row.title }}
-            </el-menu-item>
-            <el-submenu
-              :index="index + '-' + i"
-              v-if="row.hasOwnProperty('sunList')"
-            >
-              <template slot="title">{{ row.title }}</template>
-              <el-menu-item
-                v-for="(col, j) in row.sunList"
-                :key="j"
-                :index="col.path"
-                @click="skipPath(col.path)"
-              >
-                {{ col.title }}
-              </el-menu-item>
-            </el-submenu>
-          </div>
-        </el-submenu>
-      </el-menu>
+      <menuNav :isCollapse="isCollapse"></menuNav>
     </div>
     <div class="adminMain" :style="{ 'margin-left': menuWidth + 'px' }">
       <div class="adminUpper">
@@ -87,23 +42,14 @@
             <i :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></i>
           </div>
           <div class="adminTag">
-            <el-tag
-              v-for="item in tagList"
-              :key="item"
-              closable
-              @close="closeTag(item)"
-            >
-              {{ tag }}
-            </el-tag>
+            <tagNav></tagNav>
           </div>
         </div>
       </div>
       <div class="adminView">
-        <transition name="move" mode="out-in">
-          <keep-alive>
-            <router-view />
-          </keep-alive>
-        </transition>
+        <keep-alive>
+          <router-view />
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -111,81 +57,15 @@
 
 <script>
 import screenfull from "screenfull";
+import tagNav from "../component/tagNav";
+import menuNav from "../component/menuNav";
 export default {
+  components: {
+    tagNav,
+    menuNav,
+  },
   data() {
     return {
-      menuList: [
-        {
-          title: "首页",
-          path: "/main",
-          icon: "el-icon-s-home",
-        },
-        {
-          title: "echart图表",
-          icon: "el-icon-s-data",
-          childList: [
-            {
-              title: "中国地图",
-              path: "/mapEchart",
-            },
-            {
-              title: "折线柱状混合图",
-              path: "/mixEchart",
-            },
-          ],
-        },
-        {
-          title: "组件",
-          icon: "el-icon-aim",
-          childList: [
-            {
-              title: "外部组件",
-              sunList: [
-                {
-                  title: "列表拖拽",
-                  path: "/vueDraggable",
-                },
-                {
-                  title: "水波纹",
-                  path: "/vueRippleDirective",
-                },
-                {
-                  title: "裁剪图片",
-                  path: "/vueCropper",
-                },
-              ],
-            },
-            {
-              title: "element组件",
-              sunList: [
-                {
-                  title: "table表格",
-                  path: "/table",
-                },
-                {
-                  title: "地址联动",
-                  path: "/cascaderArea",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          title: "抽奖",
-          icon: "el-icon-orange",
-          childList: [
-            {
-              title: "九宫格抽奖",
-              path: "/gridLottery",
-            },
-            {
-              title: "大转盘抽奖",
-              path: "/plateLottery",
-            },
-          ],
-        },
-      ],
-      tagList: [],
       isCollapse: false,
       isFullscreen: false,
       isAnimate: false,
@@ -194,12 +74,6 @@ export default {
   },
   mounted() {},
   methods: {
-    skipPath(e) {
-      this.$router.push({
-        path: "." + e,
-      });
-    },
-
     // 全屏
     toggleFull() {
       this.isFullscreen = !this.isFullscreen;
@@ -220,8 +94,6 @@ export default {
       }
       this.isCollapse = !this.isCollapse;
     },
-
-    closeTag(item) {},
   },
 };
 </script>
@@ -238,9 +110,7 @@ export default {
   overflow-y: auto;
   transition: all 0.3s;
 }
-.adminMenuNav .el-menu {
-  border-right: unset;
-}
+
 .adminMain {
   margin-left: 210px;
   transition: all 0.3s;
@@ -300,17 +170,18 @@ export default {
   cursor: pointer;
 }
 .adminNav {
+  display: flex;
+  align-items: center;
   padding: 5px 20px;
   box-sizing: border-box;
 }
 
-.move-enter-active,
-.move-leave-active {
-  transition: opacity 0.3s;
+.adminView {
+  overflow: auto;
 }
 
-.move-enter,
-.move-leave {
-  opacity: 0;
+.adminTag {
+  width: 100%;
+  margin-left: 20px;
 }
 </style>
