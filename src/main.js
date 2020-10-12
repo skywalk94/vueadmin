@@ -11,6 +11,7 @@ import animate from "animate.css";
 Vue.use(animate);
 
 Vue.config.productionTip = false
+
 new Vue({
   router,
   store,

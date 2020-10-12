@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <!-- <iframe src="https://blog.csdn.net/ak852369/" frameborder="0"></iframe> -->
+    <iframe src="https://blog.csdn.net/ak852369/" frameborder="0"></iframe>
   </div>
 </template>
 

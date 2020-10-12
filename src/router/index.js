@@ -1,48 +1,52 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(VueRouter)
 
 const routes = [{
   path: '/',
   name: 'index',
   redirect: '/main',
-  component: () => import( /* webpackChunkName: "/" */ '@/views/index'),
+  component: () => import( /* webpackChunkName: "index" */ '@/views/index'),
   meta: {
     title: '首页'
   },
   children: [{
       path: "/main",
       name: "main",
-      component: () => import( /* webpackChunkName: "/main" */ '@/views/main'),
+      component: () => import( /* webpackChunkName: "main" */ '@/views/main'),
       meta: {
         title: '首页'
       },
     }, {
       path: "/table",
       name: "table",
-      component: () => import( /* webpackChunkName: "/table" */ '@/views/table'),
+      component: () => import( /* webpackChunkName: "table" */ '@/views/table'),
       meta: {
         title: '表格'
       },
     }, {
       path: "/vueRippleDirective",
       name: "vueRippleDirective",
-      component: () => import( /* webpackChunkName: "/vueRippleDirective" */ '@/views/vueRippleDirective'),
+      component: () => import( /* webpackChunkName: "vueRippleDirective" */ '@/views/vueRippleDirective'),
       meta: {
         title: '水波纹'
       },
     }, {
       path: "/mapEchart",
       name: "mapEchart",
-      component: () => import( /* webpackChunkName: "/mapEchart" */ '@/views/mapEchart'),
+      component: () => import( /* webpackChunkName: "mapEchart" */ '@/views/mapEchart'),
       meta: {
         title: '中国地图'
       },
     }, {
       path: "/mixEchart",
       name: "mixEchart",
-      component: () => import( /* webpackChunkName: "/mixEchart" */ '@/views/mixEchart'),
+      component: () => import( /* webpackChunkName: "mixEchart" */ '@/views/mixEchart'),
       meta: {
         title: '混合图表'
       },
@@ -50,7 +54,7 @@ const routes = [{
     {
       path: "/vueDraggable",
       name: "vueDraggable",
-      component: () => import( /* webpackChunkName: "/vueDraggable" */ '@/views/vueDraggable'),
+      component: () => import( /* webpackChunkName: "vueDraggable" */ '@/views/vueDraggable'),
       meta: {
         title: '列表拖拽'
       },
@@ -58,7 +62,7 @@ const routes = [{
     {
       path: "/gridLottery",
       name: "gridLottery",
-      component: () => import( /* webpackChunkName: "/gridLottery" */ '@/views/gridLottery'),
+      component: () => import( /* webpackChunkName: "gridLottery" */ '@/views/gridLottery'),
       meta: {
         title: '九宫格抽奖'
       },
@@ -66,7 +70,7 @@ const routes = [{
     {
       path: "/plateLottery",
       name: "plateLottery",
-      component: () => import( /* webpackChunkName: "/plateLottery" */ '@/views/plateLottery'),
+      component: () => import( /* webpackChunkName: "plateLottery" */ '@/views/plateLottery'),
       meta: {
         title: '大转盘抽奖'
       },
@@ -74,7 +78,7 @@ const routes = [{
     {
       path: "/cascaderArea",
       name: "cascaderArea",
-      component: () => import( /* webpackChunkName: "/cascaderArea" */ '@/views/cascaderArea'),
+      component: () => import( /* webpackChunkName: "cascaderArea" */ '@/views/cascaderArea'),
       meta: {
         title: '地址联动'
       },
@@ -82,7 +86,7 @@ const routes = [{
     {
       path: "/vueCropper",
       name: "vueCropper",
-      component: () => import( /* webpackChunkName: "/vueCropper" */ '@/views/vueCropper'),
+      component: () => import( /* webpackChunkName: "vueCropper" */ '@/views/vueCropper'),
       meta: {
         title: '裁剪图片'
       },

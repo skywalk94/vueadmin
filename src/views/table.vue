@@ -1,8 +1,13 @@
 <template>
   <div class="box">
-    <el-button type="primary" icon="el-icon-download" @click="exportEx"
-      >导出表格</el-button
+    <download-excel
+      :fields="json_fields"
+      :data="tableData"
+      name="用户数据"
+      type="xls"
     >
+      <el-button type="primary" icon="el-icon-download">导出表格</el-button>
+    </download-excel>
     <el-table
       id="export2excel"
       :data="
@@ -47,12 +52,24 @@
 </template>
 
 <script>
+import JsonExcel from "vue-json-excel";
 export default {
+  components: {
+    "download-excel": JsonExcel,
+  },
   data() {
     return {
       tableData: [],
       currentPage: 1,
       pagesize: 10,
+      json_fields: {
+        日期: "date",
+        姓名: "name",
+        省份: "province",
+        市区: "city",
+        地址: "address",
+        邮编: "zip",
+      },
     };
   },
   mounted() {
@@ -68,7 +85,7 @@ export default {
           province: "上海",
           city: "普陀区",
           address: "上海市普陀区金沙江路 1518 弄",
-          zip: 2003331231231451241,
+          zip: 200000,
         });
       }
       this.tableData = list;
@@ -87,28 +104,9 @@ export default {
     handleSizeChange: function (size) {
       this.pagesize = size;
     },
+
     handleCurrentChange: function (currentPage) {
       this.currentPage = currentPage;
-    },
-
-    // 导出表格
-    exportEx() {
-      let str = `日期,姓名,省份,市区,地址,邮编\n`;
-      var jsonData = this.tableData;
-      //增加\t为了不让表格显示科学计数法或者其他格式
-      for (let i in jsonData) {
-        for (let j in jsonData[i]) {
-          str += `${jsonData[i][j] + "\t"},`;
-        }
-        str += "\n";
-      }
-      let uri = "data:text/csv;charset=utf-8,\ufeff" + encodeURIComponent(str);
-      let link = document.createElement("a");
-      link.href = uri;
-      link.download = "表格.xls";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
     },
   },
 };
