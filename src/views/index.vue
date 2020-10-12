@@ -2,7 +2,7 @@
   <div class="adminMainBox">
     <div
       class="adminMenuNav"
-      :class="isMobile ? (isShow ? 'show' : 'hidden') : ''"
+      :class="isMobile ? (isShow ? 'menuShow' : 'menuHidden') : ''"
       :style="{ width: isMobile ? 210 + 'px' : menuWidth + 'px' }"
     >
       <menuNav :isCollapse="isCollapse"></menuNav>
@@ -63,7 +63,7 @@ export default {
     this.getClient();
   },
   methods: {
-    // 判断来源是否为移动端
+    // 监听窗口尺寸
     getClient() {
       var viewWidth = window.innerWidth;
       this.fitMobile(viewWidth);
@@ -75,7 +75,7 @@ export default {
 
     // 适配移动端
     fitMobile(width) {
-      if (width < 500) {
+      if (width < 600) {
         this.isCollapse = false;
         this.isMobile = true;
         this.isShow = false;
@@ -113,15 +113,20 @@ export default {
   width: 210px;
   height: 100%;
   background: #304156;
-  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
   transition: all 0.3s;
 }
 
-.show {
+.adminMenuNav:hover {
+  overflow-y: auto;
+}
+
+.menuShow {
   transform: translateX(0);
 }
 
-.hidden {
+.menuHidden {
   transform: translateX(-100%);
 }
 

@@ -3,36 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-// import ElementUI from 'element-ui'
-// import 'element-ui/lib/theme-chalk/index.css'
-// Vue.use(ElementUI)
-
-import {
-  Button,
-  ButtonGroup,
-  Table,
-  TableColumn,
-  Pagination,
-  Menu,
-  MenuItem,
-  MenuItemGroup,
-  Tooltip,
-  Submenu,
-  Loading,
-  MessageBox,
-  Message,
-  Cascader,
-  tag
-} from 'element-ui';
-
-Vue.use(Button).use(ButtonGroup).use(Table).use(TableColumn).use(Pagination).use(Menu).use(MenuItem).use(MenuItemGroup).use(Tooltip).use(Submenu).use(Cascader).use(tag)
-Vue.prototype.$loading = Loading.service;
-Vue.prototype.$msgbox = MessageBox;
-Vue.prototype.$alert = MessageBox.alert;
-Vue.prototype.$confirm = MessageBox.confirm;
-Vue.prototype.$prompt = MessageBox.prompt;
-Vue.prototype.$notify = Notification;
-Vue.prototype.$message = Message;
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
 
 import animate from "animate.css";
 Vue.use(animate);

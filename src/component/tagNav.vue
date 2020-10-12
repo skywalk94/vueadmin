@@ -45,6 +45,7 @@ export default {
         path: "." + item.path,
       });
     },
+
     // 跳转页面push到面包屑
     getTag(item) {
       var index = this.tagList.map((item) => item.path).indexOf(item.path);
@@ -88,8 +89,12 @@ export default {
 <style lang="less" scoped>
 .tagBox {
   width: 90%;
-  overflow-x: auto;
+  overflow-x: hidden;
   white-space: nowrap;
+}
+
+.tagBox:hover {
+  overflow-x: auto;
 }
 
 .tagBox .el-tag {
@@ -99,17 +104,5 @@ export default {
 
 .tagBox .el-tag:last-child {
   margin-right: unset;
-}
-.tagBox::-webkit-scrollbar {
-  height: 6px;
-}
-
-.tagBox::-webkit-scrollbar-thumb {
-  background-color: #ddd;
-  border-radius: 10px;
-}
-
-.tagBox::-webkit-scrollbar-thumb:hover {
-  background-color: #bbb;
 }
 </style>
