@@ -5,6 +5,9 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 Vue.use(VueRouter)
 
 const routes = [{
@@ -100,7 +103,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title;
+  NProgress.start();
   next()
 })
 
+router.afterEach(() => {
+  NProgress.done()
+})
 export default router
