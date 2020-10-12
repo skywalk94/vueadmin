@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <download-excel
-      :fields="json_fields"
+      :fields="fields"
       :data="tableData"
       name="用户数据"
       type="xls"
@@ -9,18 +9,26 @@
       <el-button type="primary" icon="el-icon-download">导出表格</el-button>
     </download-excel>
     <el-table
-      id="export2excel"
       :data="
         tableData.slice((currentPage - 1) * pagesize, currentPage * pagesize)
       "
-      :default-sort="{ prop: 'date', order: 'descending' }"
       border
       style="width: 100%"
       stripe
       highlight-current-row
+      row-key="id"
+      @selection-change="selectTable"
     >
+      <el-table-column type="selection" width="55" reserve-selection>
+      </el-table-column>
       <el-table-column label="序号">
         <template slot-scope="scope">{{ scope.$index + 1 }}</template>
+      </el-table-column>
+      <el-table-column prop="id" label="id"></el-table-column>
+      <el-table-column label="图片">
+        <template>
+          <el-image :src="imgUrl" :preview-src-list="[imgUrl]"> </el-image>
+        </template>
       </el-table-column>
       <el-table-column prop="date" label="日期"></el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
@@ -62,7 +70,7 @@ export default {
       tableData: [],
       currentPage: 1,
       pagesize: 10,
-      json_fields: {
+      fields: {
         日期: "date",
         姓名: "name",
         省份: "province",
@@ -70,6 +78,8 @@ export default {
         地址: "address",
         邮编: "zip",
       },
+      imgUrl:
+        "https://sucai.suoluomei.cn/sucai_zs/images/20200711135449-b3a2a02b62999fa7ebcebcd9fad537d.jpg",
     };
   },
   mounted() {
@@ -80,6 +90,7 @@ export default {
       var list = [];
       for (let i = 0; i < 50; i++) {
         list.push({
+          id: i,
           date: "2016-05-02",
           name: "王小虎" + i,
           province: "上海",
@@ -107,6 +118,11 @@ export default {
 
     handleCurrentChange: function (currentPage) {
       this.currentPage = currentPage;
+    },
+
+    // 选择的数据
+    selectTable(e) {
+      console.log(e);
     },
   },
 };

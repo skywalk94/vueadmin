@@ -2,9 +2,10 @@
   <div class="tagBox">
     <el-tag
       v-for="(item, index) in tagList"
-      :key="index"
+      :key="item.path"
       :closable="index > 0"
       size="medium"
+      :disable-transitions="false"
       @click="clickTag(item)"
       @close="closeTag(item)"
       :effect="item.active ? 'dark' : 'plain'"
