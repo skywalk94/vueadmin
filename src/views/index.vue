@@ -63,9 +63,9 @@ export default {
       };
     },
 
-    // 适配移动端
+    // 适配小尺寸
     fitMobile(width) {
-      if (width < 650) {
+      if (width < 700) {
         this.isCollapse = false;
         this.isMobile = true;
         this.isShow = false;
@@ -145,5 +145,6 @@ export default {
 
 .adminView {
   margin-top: 100px;
+  overflow-x: auto;
 }
 </style>

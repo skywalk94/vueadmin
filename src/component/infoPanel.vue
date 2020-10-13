@@ -35,11 +35,12 @@
             />
           </div>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="goBlog()"
-              >我的博客</el-dropdown-item
-            >
-            <el-dropdown-item @click.native="goHome()"
-              >回到首页</el-dropdown-item
+            <el-dropdown-item
+              v-for="(item, index) in dropdownList"
+              :key="index"
+              :divided="index == dropdownList.length - 1"
+              @click.native="operateMenu(index)"
+              >{{ item }}</el-dropdown-item
             >
           </el-dropdown-menu>
         </el-dropdown>
@@ -79,6 +80,7 @@ export default {
       scrollList: [],
       isOpen: false,
       isShow: true,
+      dropdownList: ["我的博客", "回到首页", "退出登录"],
     };
   },
   props: {
@@ -109,16 +111,27 @@ export default {
       this.isAnimate = !this.isAnimate;
     },
 
-    goBlog() {
-      window.open("https://blog.csdn.net/AK852369");
+    operateMenu(index) {
+      switch (index) {
+        case 0:
+          window.open("https://blog.csdn.net/AK852369");
+          break;
+        case 1:
+          this.$router.push({
+            path: "/main",
+          });
+          break;
+        case 2:
+          var cookie = document.cookie;
+          document.cookie = cookie + ";expires=" + new Date(0).toUTCString();
+          this.$router.push({
+            path: "/login",
+          });
+          break;
+      }
     },
 
-    goHome() {
-      this.$router.push({
-        path: "./main",
-      });
-    },
-
+    // 监听页面滚动进行隐藏
     watchScroll() {
       document.addEventListener("scroll", this.handleScroll, true);
     },
@@ -139,6 +152,7 @@ export default {
 .infoBox {
   position: fixed;
   top: 0;
+  right: 0;
   z-index: 100;
   background: #fff;
   padding: 2px 0;
