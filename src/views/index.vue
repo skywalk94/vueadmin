@@ -144,7 +144,6 @@ export default {
 }
 
 .adminView {
-  margin-top: 100px;
   overflow-x: auto;
 }
 </style>

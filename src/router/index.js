@@ -103,6 +103,14 @@ const routes = [{
     meta: {
       title: '登录'
     },
+  },
+  {
+    path: "*",
+    name: "error",
+    component: () => import( /* webpackChunkName: "error" */ '@/views/error'),
+    meta: {
+      title: '404'
+    },
   }
 ]
 

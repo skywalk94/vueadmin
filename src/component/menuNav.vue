@@ -119,6 +119,11 @@ export default {
             },
           ],
         },
+        {
+          title: "404",
+          path: "/error",
+          icon: "el-icon-error",
+        },
       ],
     };
   },

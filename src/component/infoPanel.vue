@@ -1,68 +1,71 @@
 <template>
-  <div
-    class="infoBox"
-    :style="{ width: !isMobile ? `calc(100% - ${menuWidth}px)` : '100%' }"
-    :class="isShow ? 'infoShow' : 'infoHidden'"
-  >
-    <div class="infoUpper">
-      <div class="infoTitle">vue后台管理系统</div>
-      <div class="infoUser">
-        <el-tooltip
-          effect="dark"
-          :content="isFullscreen ? '取消全屏' : '全屏'"
-          placement="bottom"
-        >
-          <div class="infoFull" @click="toggleFull()">
-            <img
-              :src="
-                isFullscreen
-                  ? 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-2.png'
-                  : 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-1.png'
-              "
-              alt
-            />
-          </div>
-        </el-tooltip>
-        <el-dropdown>
-          <div
-            class="infoAvatar animate__animated animate__infinite"
-            :class="isAnimate ? 'animate__pulse' : ''"
-            @click="aniAvatar()"
+  <div>
+    <div
+      class="infoBox"
+      :style="{ width: !isMobile ? `calc(100% - ${menuWidth}px)` : '100%' }"
+      :class="isShow ? 'infoShow' : 'infoHidden'"
+    >
+      <div class="infoUpper">
+        <div class="infoTitle">vue后台管理系统</div>
+        <div class="infoUser">
+          <el-tooltip
+            effect="dark"
+            :content="isFullscreen ? '取消全屏' : '全屏'"
+            placement="bottom"
           >
-            <img
-              src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg"
-              alt
-            />
-          </div>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item
-              v-for="(item, index) in dropdownList"
-              :key="index"
-              :divided="index == dropdownList.length - 1"
-              @click.native="operateMenu(index)"
-              >{{ item }}</el-dropdown-item
+            <div class="infoFull" @click="toggleFull()">
+              <img
+                :src="
+                  isFullscreen
+                    ? 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-2.png'
+                    : 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-1.png'
+                "
+                alt
+              />
+            </div>
+          </el-tooltip>
+          <el-dropdown>
+            <div
+              class="infoAvatar animate__animated animate__infinite"
+              :class="isAnimate ? 'animate__pulse' : ''"
+              @click="aniAvatar()"
             >
-          </el-dropdown-menu>
-        </el-dropdown>
+              <img
+                src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg"
+                alt
+              />
+            </div>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item
+                v-for="(item, index) in dropdownList"
+                :key="index"
+                :divided="index == dropdownList.length - 1"
+                @click.native="operateMenu(index)"
+                >{{ item }}</el-dropdown-item
+              >
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </div>
+      <div class="infoNav">
+        <div class="infoZoom">
+          <i
+            :class="
+              isMobile
+                ? 'el-icon-s-unfold'
+                : isOpen
+                ? 'el-icon-s-unfold'
+                : 'el-icon-s-fold'
+            "
+            @click="toggleMenu()"
+          ></i>
+        </div>
+        <div class="infoTag">
+          <tagNav></tagNav>
+        </div>
       </div>
     </div>
-    <div class="infoNav">
-      <div class="infoZoom">
-        <i
-          :class="
-            isMobile
-              ? 'el-icon-s-unfold'
-              : isOpen
-              ? 'el-icon-s-unfold'
-              : 'el-icon-s-fold'
-          "
-          @click="toggleMenu()"
-        ></i>
-      </div>
-      <div class="infoTag">
-        <tagNav></tagNav>
-      </div>
-    </div>
+    <div class="infoPlaceholder"></div>
   </div>
 </template>
 
@@ -161,6 +164,11 @@ export default {
   transition: all 0.2s;
 }
 
+.infoPlaceholder {
+  width: 100%;
+  height: 100px;
+}
+
 .infoShow {
   transform: translateY(0);
 }
@@ -170,7 +178,8 @@ export default {
 }
 
 .infoUpper {
-  padding: 5px 20px;
+  height: 60px;
+  padding: 0 20px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -213,9 +222,10 @@ export default {
 }
 
 .infoNav {
+  height: 40px;
   display: flex;
   align-items: center;
-  padding: 5px 20px;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
