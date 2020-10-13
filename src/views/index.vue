@@ -1,5 +1,5 @@
 <template>
-  <div class="adminMainBox">
+  <div class="adminBox">
     <div
       class="adminMenuNav"
       :class="isMobile ? (isShow ? 'menuShow' : 'menuHidden') : ''"
@@ -16,22 +16,11 @@
       class="adminMain"
       :style="{ 'margin-left': isMobile ? 0 : menuWidth + 'px' }"
     >
-      <div class="adminUpper">
-        <infoPanel></infoPanel>
-        <div class="adminNav">
-          <div class="adminZoom">
-            <i
-              :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
-              v-if="!isMobile"
-              @click="zoomMenu()"
-            ></i>
-            <i class="el-icon-s-unfold" v-else @click="showMenu()"></i>
-          </div>
-          <div class="adminTag">
-            <tagNav></tagNav>
-          </div>
-        </div>
-      </div>
+      <infoPanel
+        :isMobile="isMobile"
+        :menuWidth="menuWidth"
+        @collapse="getCollapse"
+      ></infoPanel>
       <div class="adminView">
         <keep-alive>
           <router-view />
@@ -42,26 +31,27 @@
 </template>
 
 <script>
-import tagNav from "../component/tagNav";
 import infoPanel from "../component/infoPanel";
 import menuNav from "../component/menuNav";
 export default {
   components: {
-    tagNav,
     menuNav,
     infoPanel,
   },
   data() {
     return {
-      isCollapse: false,
       menuWidth: 210,
       isMobile: false,
       isShow: false,
+      isCollapse: false,
     };
   },
+
   mounted() {
     this.getClient();
+    this.getCollapse;
   },
+
   methods: {
     // 监听窗口尺寸
     getClient() {
@@ -75,7 +65,7 @@ export default {
 
     // 适配移动端
     fitMobile(width) {
-      if (width < 600) {
+      if (width < 650) {
         this.isCollapse = false;
         this.isMobile = true;
         this.isShow = false;
@@ -85,18 +75,22 @@ export default {
       }
     },
 
-    // 缩放menu
-    zoomMenu() {
-      this.isCollapse = !this.isCollapse;
-      this.menuWidth = this.isCollapse ? 63 : 210;
+    // 获取缩放menu的开关Boolean
+    getCollapse(e) {
+      if (this.isMobile) {
+        this.showMenu();
+      } else {
+        this.isCollapse = e;
+        this.menuWidth = this.isCollapse ? 63 : 210;
+      }
     },
 
-    // 显示menu
+    // 移动端显示menu
     showMenu() {
       this.isShow = true;
     },
 
-    // 关闭menu
+    // 移动端关闭menu
     closeMenu() {
       this.isShow = false;
     },
@@ -105,6 +99,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.adminBox {
+  overflow: hidden;
+}
+
 .adminMenuNav {
   position: fixed;
   top: 0;
@@ -145,35 +143,7 @@ export default {
   transition: all 0.3s;
 }
 
-.adminUpper {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  background: #fff;
-  padding: 2px 0;
-  box-sizing: border-box;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-}
-
-.adminZoom {
-  font-size: 24px;
-  cursor: pointer;
-}
-
-.adminNav {
-  display: flex;
-  align-items: center;
-  padding: 5px 20px;
-  box-sizing: border-box;
-}
-
 .adminView {
-  overflow: auto;
-}
-
-.adminTag {
-  width: 100%;
-  margin-left: 20px;
+  margin-top: 100px;
 }
 </style>

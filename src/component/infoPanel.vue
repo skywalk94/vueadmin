@@ -1,33 +1,65 @@
 <template>
-  <div class="infoBox">
-    <div class="adminTitle">vue后台管理系统</div>
-    <div class="adminInfo">
-      <el-tooltip
-        class="item"
-        effect="dark"
-        :content="isFullscreen ? '取消全屏' : '全屏'"
-        placement="bottom"
-      >
-        <div class="adminFull" @click="toggleFull()">
-          <img
-            :src="
-              isFullscreen
-                ? 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-2.png'
-                : 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-1.png'
-            "
-            alt
-          />
-        </div>
-      </el-tooltip>
-      <div
-        class="adminAvatar animate__animated animate__infinite"
-        :class="isAnimate ? 'animate__pulse' : ''"
-        @click="aniAvatar()"
-      >
-        <img
-          src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg"
-          alt
-        />
+  <div
+    class="infoBox"
+    :style="{ width: !isMobile ? `calc(100% - ${menuWidth}px)` : '100%' }"
+    :class="isShow ? 'infoShow' : 'infoHidden'"
+  >
+    <div class="infoUpper">
+      <div class="infoTitle">vue后台管理系统</div>
+      <div class="infoUser">
+        <el-tooltip
+          effect="dark"
+          :content="isFullscreen ? '取消全屏' : '全屏'"
+          placement="bottom"
+        >
+          <div class="infoFull" @click="toggleFull()">
+            <img
+              :src="
+                isFullscreen
+                  ? 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-2.png'
+                  : 'https://sucai.suoluomei.cn/sucai_zs/images/20200729171413-1.png'
+              "
+              alt
+            />
+          </div>
+        </el-tooltip>
+        <el-dropdown>
+          <div
+            class="infoAvatar animate__animated animate__infinite"
+            :class="isAnimate ? 'animate__pulse' : ''"
+            @click="aniAvatar()"
+          >
+            <img
+              src="https://sucai.suoluomei.cn/sucai_zs/images/20200523094058-1.jpg"
+              alt
+            />
+          </div>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="goBlog()"
+              >我的博客</el-dropdown-item
+            >
+            <el-dropdown-item @click.native="goHome()"
+              >回到首页</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+    </div>
+    <div class="infoNav">
+      <div class="infoZoom">
+        <i
+          :class="
+            isMobile
+              ? 'el-icon-s-unfold'
+              : isOpen
+              ? 'el-icon-s-unfold'
+              : 'el-icon-s-fold'
+          "
+          @click="toggleMenu()"
+        ></i>
+      </div>
+      <div class="infoTag">
+        <tagNav></tagNav>
       </div>
     </div>
   </div>
@@ -35,14 +67,37 @@
 
 <script>
 import screenfull from "screenfull";
+import tagNav from "./tagNav";
 export default {
+  components: {
+    tagNav,
+  },
   data() {
     return {
       isFullscreen: false,
       isAnimate: false,
+      scrollList: [],
+      isOpen: false,
+      isShow: true,
     };
   },
+  props: {
+    isMobile: Boolean,
+    menuWidth: [Number, String],
+  },
+
+  mounted() {
+    this.watchScroll();
+    this.$emit("collapse", this.isOpen);
+  },
+
   methods: {
+    // 缩放menu,向父组件传递boolean
+    toggleMenu() {
+      this.isOpen = !this.isOpen;
+      this.$emit("collapse", this.isOpen);
+    },
+
     // 全屏
     toggleFull() {
       this.isFullscreen = !this.isFullscreen;
@@ -53,12 +108,54 @@ export default {
     aniAvatar() {
       this.isAnimate = !this.isAnimate;
     },
+
+    goBlog() {
+      window.open("https://blog.csdn.net/AK852369");
+    },
+
+    goHome() {
+      this.$router.push({
+        path: "./main",
+      });
+    },
+
+    watchScroll() {
+      document.addEventListener("scroll", this.handleScroll, true);
+    },
+
+    handleScroll() {
+      this.scrollList.push(window.pageYOffset);
+      if (this.scrollList.length > 2) {
+        var end = this.scrollList[this.scrollList.length - 1];
+        var beforEnd = this.scrollList[this.scrollList.length - 2];
+        this.isShow = end > beforEnd ? false : true;
+      }
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
 .infoBox {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  padding: 2px 0;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s;
+}
+
+.infoShow {
+  transform: translateY(0);
+}
+
+.infoHidden {
+  transform: translateY(-100%);
+}
+
+.infoUpper {
   padding: 5px 20px;
   box-sizing: border-box;
   display: flex;
@@ -66,32 +163,54 @@ export default {
   justify-content: space-between;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 }
-.adminInfo {
+
+.infoUser {
   display: flex;
   align-items: center;
 }
 
-.adminTitle {
+.infoTitle {
   font-size: 20px;
   color: #304156;
 }
 
-.adminFull {
+.infoFull {
   width: 30px;
   cursor: pointer;
 }
 
-.adminFull img,
-.adminAvatar img {
+.infoFull img,
+.infoAvatar img {
   width: 100%;
   height: 100%;
 }
 
-.adminAvatar {
+.infoAvatar {
   width: 45px;
   height: 45px;
   margin-left: 20px;
   border-radius: 50%;
   overflow: hidden;
+}
+
+.infoZoom {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.infoNav {
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  box-sizing: border-box;
+}
+
+.infoView {
+  overflow: auto;
+}
+
+.infoTag {
+  width: 100%;
+  margin-left: 20px;
 }
 </style>

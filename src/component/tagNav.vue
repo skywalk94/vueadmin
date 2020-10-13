@@ -101,6 +101,7 @@ export default {
 .tagBox .el-tag {
   margin-right: 10px;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 .tagBox .el-tag:last-child {
