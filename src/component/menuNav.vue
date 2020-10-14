@@ -92,6 +92,10 @@ export default {
                   title: "html生成图片",
                   path: "/html2canvas",
                 },
+                {
+                  title: "wangEditor富文本",
+                  path: "/wangEditor",
+                },
               ],
             },
             {

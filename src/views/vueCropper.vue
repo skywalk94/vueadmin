@@ -72,22 +72,17 @@ export default {
   margin: 30px auto 0;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .crop,
 .pic {
-  width: 600px;
-  height: 400px;
+  width: 500px;
+  height: 300px;
 }
 
 .btn {
   display: flex;
-  flex-direction: column;
-}
-
-.btn button {
   margin: 10px 0;
 }
 </style>

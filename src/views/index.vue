@@ -112,12 +112,8 @@ export default {
   height: 100%;
   background: #304156;
   overflow-x: hidden;
-  overflow-y: hidden;
-  transition: all 0.3s;
-}
-
-.adminMenuNav:hover {
   overflow-y: auto;
+  transition: all 0.3s;
 }
 
 .menuShow {

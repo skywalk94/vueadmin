@@ -103,6 +103,14 @@ const routes = [{
         },
       },
       {
+        path: "/wangEditor",
+        name: "wangEditor",
+        component: () => import( /* webpackChunkName: "wangEditor" */ '@/views/wangEditor'),
+        meta: {
+          title: 'wangEditor富文本'
+        },
+      },
+      {
         path: "/error",
         name: "error",
         component: () => import( /* webpackChunkName: "error" */ '@/views/error'),
