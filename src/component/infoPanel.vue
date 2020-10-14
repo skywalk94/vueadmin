@@ -6,7 +6,7 @@
       :class="isShow ? 'infoShow' : 'infoHidden'"
     >
       <div class="infoUpper">
-        <div class="infoTitle">vue后台管理系统</div>
+        <div class="infoTitle" @click="goHome()">vue后台管理系统</div>
         <div class="infoUser">
           <el-tooltip
             effect="dark"
@@ -83,7 +83,7 @@ export default {
       scrollList: [],
       isOpen: false,
       isShow: true,
-      dropdownList: ["我的博客", "回到首页", "退出登录"],
+      dropdownList: ["回到首页", "退出登录", "我的博客"],
     };
   },
   props: {
@@ -117,21 +117,27 @@ export default {
     operateMenu(index) {
       switch (index) {
         case 0:
-          window.open("https://blog.csdn.net/AK852369");
-          break;
-        case 1:
           this.$router.push({
             path: "/main",
           });
           break;
-        case 2:
+        case 1:
           var cookie = document.cookie;
           document.cookie = cookie + ";expires=" + new Date(0).toUTCString();
           this.$router.push({
             path: "/login",
           });
           break;
+        case 2:
+          window.open("https://blog.csdn.net/AK852369");
+          break;
       }
+    },
+
+    goHome() {
+      this.$router.push({
+        path: "/main",
+      });
     },
 
     // 监听页面滚动进行隐藏
@@ -166,7 +172,7 @@ export default {
 
 .infoPlaceholder {
   width: 100%;
-  height: 100px;
+  height: 105px;
 }
 
 .infoShow {
@@ -195,6 +201,14 @@ export default {
 .infoTitle {
   font-size: 20px;
   color: #304156;
+  user-select: none;
+  cursor: pointer;
+}
+
+@media (max-width: 300px) {
+  .infoTitle {
+    visibility: hidden;
+  }
 }
 
 .infoFull {

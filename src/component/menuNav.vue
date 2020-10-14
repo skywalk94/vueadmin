@@ -88,6 +88,10 @@ export default {
                   title: "裁剪图片",
                   path: "/vueCropper",
                 },
+                {
+                  title: "html生成图片",
+                  path: "/html2canvas",
+                },
               ],
             },
             {

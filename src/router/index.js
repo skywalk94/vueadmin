@@ -94,6 +94,22 @@ const routes = [{
           title: '裁剪图片'
         },
       },
+      {
+        path: "/html2canvas",
+        name: "html2canvas",
+        component: () => import( /* webpackChunkName: "html2canvas" */ '@/views/html2canvas'),
+        meta: {
+          title: 'html生成图片'
+        },
+      },
+      {
+        path: "/error",
+        name: "error",
+        component: () => import( /* webpackChunkName: "error" */ '@/views/error'),
+        meta: {
+          title: '错误地址'
+        },
+      }
     ]
   },
   {
@@ -106,7 +122,7 @@ const routes = [{
   },
   {
     path: "*",
-    name: "error",
+    name: "404",
     component: () => import( /* webpackChunkName: "error" */ '@/views/error'),
     meta: {
       title: '404'

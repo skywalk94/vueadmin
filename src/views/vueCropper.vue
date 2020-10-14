@@ -73,16 +73,20 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
+
 .crop,
 .pic {
   width: 600px;
   height: 400px;
 }
+
 .btn {
   display: flex;
   flex-direction: column;
 }
+
 .btn button {
   margin: 10px 0;
 }

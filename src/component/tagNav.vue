@@ -90,12 +90,8 @@ export default {
 <style lang="less" scoped>
 .tagBox {
   width: 90%;
-  overflow-x: hidden;
-  white-space: nowrap;
-}
-
-.tagBox:hover {
   overflow-x: auto;
+  white-space: nowrap;
 }
 
 .tagBox .el-tag {
