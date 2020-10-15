@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div id="editor"></div>
+    <richEditor @change="changeRich"></richEditor>
     <div class="btn">
       <el-button type="primary" @click="getEditorData"
         >生成的html代码</el-button
@@ -12,46 +12,29 @@
 </template>
 
 <script>
-import wangEditor from "wangeditor";
+import richEditor from "../component/richEditor";
 export default {
+  components: {
+    richEditor,
+  },
   data() {
     return {
-      editor: null,
       editorData: "",
     };
   },
-  mounted() {
-    this.initEditor();
-  },
-
-  beforeDestroy() {
-    // 调用销毁 API 对当前编辑器实例进行销毁
-    this.editor.destroy();
-    this.editor = null;
-  },
+  mounted() {},
 
   methods: {
-    // 初始化插件
-    initEditor() {
-      const editor = new wangEditor("#editor");
-      editor.config.onchangeTimeout = 0;
-      editor.config.uploadImgShowBase64 = true;
-      // 配置 onchange 回调函数，将数据同步到 vue 中
-      editor.config.onchange = (res) => {
-        this.editorData = res;
-      };
-      // 创建编辑器
-      editor.create();
-      this.editor = editor;
+    changeRich(e) {
+      this.editorData = e;
     },
 
     // 获取编辑器内容
     getEditorData() {
-      let data = this.editor.txt.html();
+      let data = this.editorData;
       this.$notify({
         title: "html代码",
         message: data,
-        position: "bottom-left",
       });
     },
   },

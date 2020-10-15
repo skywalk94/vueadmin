@@ -23,11 +23,15 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #ddd;
+  background-color: #ccc;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #bbb;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #aaa;
 }
 </style>

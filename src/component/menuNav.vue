@@ -92,10 +92,6 @@ export default {
                   title: "html生成图片",
                   path: "/html2canvas",
                 },
-                {
-                  title: "wangEditor富文本",
-                  path: "/wangEditor",
-                },
               ],
             },
             {
@@ -114,6 +110,16 @@ export default {
           ],
         },
         {
+          title: "编辑器",
+          icon: "el-icon-edit",
+          childList: [
+            {
+              title: "wangEditor富文本",
+              path: "/wangEditor",
+            },
+          ],
+        },
+        {
           title: "抽奖",
           icon: "el-icon-orange",
           childList: [
@@ -128,7 +134,7 @@ export default {
           ],
         },
         {
-          title: "404",
+          title: "错误地址",
           path: "/error",
           icon: "el-icon-error",
         },
