@@ -117,6 +117,10 @@ export default {
               title: "wangEditor富文本",
               path: "/wangEditor",
             },
+            {
+              title: "mavonEditor编辑器",
+              path: "/mavonEditor",
+            },
           ],
         },
         {

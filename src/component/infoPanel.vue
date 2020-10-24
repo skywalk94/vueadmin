@@ -90,13 +90,21 @@ export default {
     isMobile: Boolean,
     menuWidth: [Number, String],
   },
-
+  watch: {
+    $route(route) {
+      this.getBreadcrumb();
+    },
+  },
   mounted() {
     this.watchScroll();
     this.$emit("collapse", this.isOpen);
   },
 
   methods: {
+    getBreadcrumb() {
+      let matched = this.$route.matched.filter((item) => item.name);
+      console.log(matched);
+    },
     // 缩放menu,向父组件传递boolean
     toggleMenu() {
       this.isOpen = !this.isOpen;
@@ -167,7 +175,7 @@ export default {
   padding: 2px 0;
   box-sizing: border-box;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  transition: all 0.2s;
+  transition: all 0.5s;
 }
 
 .infoPlaceholder {

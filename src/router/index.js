@@ -111,6 +111,14 @@ const routes = [{
         },
       },
       {
+        path: "/mavonEditor",
+        name: "mavonEditor",
+        component: () => import( /* webpackChunkName: "mavonEditor" */ '@/views/mavonEditor'),
+        meta: {
+          title: 'mavonEditor编辑器'
+        },
+      },
+      {
         path: "/error",
         name: "error",
         component: () => import( /* webpackChunkName: "error" */ '@/views/error'),

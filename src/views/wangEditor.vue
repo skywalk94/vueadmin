@@ -31,10 +31,9 @@ export default {
 
     // 获取编辑器内容
     getEditorData() {
-      let data = this.editorData;
       this.$notify({
         title: "html代码",
-        message: data,
+        message: this.editorData,
       });
     },
   },
