@@ -90,20 +90,20 @@ export default {
     isMobile: Boolean,
     menuWidth: [Number, String],
   },
-  watch: {
-    $route(route) {
-      this.getBreadcrumb();
-    },
-  },
   mounted() {
     this.watchScroll();
     this.$emit("collapse", this.isOpen);
   },
 
+  watch: {
+    $route(route) {
+      this.getBreadcrumb();
+    },
+  },
+
   methods: {
     getBreadcrumb() {
       let matched = this.$route.matched.filter((item) => item.name);
-      console.log(matched);
     },
     // 缩放menu,向父组件传递boolean
     toggleMenu() {
