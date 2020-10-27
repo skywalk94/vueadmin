@@ -92,6 +92,10 @@ export default {
                   title: "html生成图片",
                   path: "/html2canvas",
                 },
+                {
+                  title: "瀑布流布局",
+                  path: "/vueWaterfallEasy",
+                },
               ],
             },
             {

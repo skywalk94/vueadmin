@@ -103,6 +103,14 @@ const routes = [{
         },
       },
       {
+        path: "/vueWaterfallEasy",
+        name: "vueWaterfallEasy",
+        component: () => import( /* webpackChunkName: "vueWaterfallEasy" */ '@/views/vueWaterfallEasy'),
+        meta: {
+          title: '瀑布流布局'
+        },
+      },
+      {
         path: "/wangEditor",
         name: "wangEditor",
         component: () => import( /* webpackChunkName: "wangEditor" */ '@/views/wangEditor'),
