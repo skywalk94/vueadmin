@@ -29,7 +29,6 @@ export default {
     startDraw() {
       if (this.isSpin) {
         this.isSpin = false;
-        this.watchAni();
         this.spinPrize();
       } else {
         alert("正在抽奖，请勿重复点击");
@@ -44,23 +43,16 @@ export default {
       var lottery = (360 / total) * active - 360 / total / 2; //计算定位到指定商品中间
       var rotate = lottery + 1800; //总旋转度数
       this.rotate = rotate;
-      this.watchAni();
-    },
-
-    // 监听动画事件
-    watchAni() {
       var ele = document.querySelector(".main");
-      if (this.isSpin) {
-        ele.removeEventListener("transitionend", this.callback);
-      } else {
-        ele.addEventListener("transitionend", this.callback);
-      }
+      ele.addEventListener("transitionend", this.callback);
     },
 
     // 动画执行完成的回调
     callback() {
       alert("中奖");
       // 复位
+      var ele = document.querySelector(".main");
+      ele.removeEventListener("transitionend", this.callback);
       this.isSpin = true;
     },
   },
