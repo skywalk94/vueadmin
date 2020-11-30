@@ -36,7 +36,7 @@ export default {
   methods: {
     login() {
       this.isLoading = true;
-      document.cookie = "adminToken=" + this.userName;
+      localStorage.setItem("userInfo", this.userName);
       this.$router.replace({
         path: "/main",
       });

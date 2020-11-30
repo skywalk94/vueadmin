@@ -130,8 +130,7 @@ export default {
           });
           break;
         case 1:
-          var cookie = document.cookie;
-          document.cookie = cookie + ";expires=" + new Date(0).toUTCString();
+          localStorage.removeItem("userInfo");
           this.$router.push({
             path: "/login",
           });

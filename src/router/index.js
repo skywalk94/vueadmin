@@ -161,7 +161,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title;
   NProgress.start();
-  if (!document.cookie) {
+  if (!localStorage.getItem("userInfo")) {
     if (to.path == '/login') {
       next()
     } else {
