@@ -1,9 +1,8 @@
 <template>
   <div class="box">
     <img
-      class="main"
-      :class="isSpin ? 'reset' : 'start'"
-      :style="{ transform: !isSpin ? `rotate(-${rotate}deg)` : 'none' }"
+      :class="['main', isSpin ? 'start' : 'reset']"
+      :style="{ transform: isSpin ? `rotate(-${rotate}deg)` : 'none' }"
       src="https://sucai.suoluomei.cn/sucai_zs/images/20190926090636-1.png"
       alt=""
     />
@@ -20,15 +19,15 @@
 export default {
   data() {
     return {
-      isSpin: true,
+      isSpin: false,
       rotate: 0,
     };
   },
   methods: {
     // 点击抽奖
     startDraw() {
-      if (this.isSpin) {
-        this.isSpin = false;
+      if (!this.isSpin) {
+        this.isSpin = true;
         this.spinPrize();
       } else {
         alert("正在抽奖，请勿重复点击");
@@ -53,7 +52,7 @@ export default {
       // 复位
       var ele = document.querySelector(".main");
       ele.removeEventListener("transitionend", this.callback);
-      this.isSpin = true;
+      this.isSpin = false;
     },
   },
 };
