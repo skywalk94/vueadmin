@@ -57,10 +57,10 @@ export default {
     getClient() {
       var viewWidth = window.innerWidth;
       this.fitMobile(viewWidth);
-      window.onresize = (res) => {
+      window.addEventListener("resize", (res) => {
         viewWidth = res.target.innerWidth;
         this.fitMobile(viewWidth);
-      };
+      });
     },
 
     // 适配小尺寸
