@@ -4,36 +4,36 @@
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {};
-  },
-};
+  export default {
+    data() {
+      return {};
+    },
+  };
 </script>
 <style lang="less">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
-    Microsoft YaHei, Arial, sans-serif;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+      Microsoft YaHei, Arial, sans-serif;
+  }
 
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 10px;
-}
+  ::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: #bbb;
-}
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb;
+  }
 
-::-webkit-scrollbar-thumb:active {
-  background-color: #aaa;
-}
+  ::-webkit-scrollbar-thumb:active {
+    background-color: #aaa;
+  }
 </style>

@@ -10,28 +10,29 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {};
-  },
-  methods: {
-    backHome() {
-      this.$router.replace({
-        path: "/main",
-      });
+  export default {
+    data() {
+      return {};
     },
-  },
-};
+    methods: {
+      backHome() {
+        this.$router.replace({
+          path: "/main",
+        });
+      },
+    },
+  };
 </script>
 
 <style lang="less" scoped>
-.gif,
-img {
-  width: 100%;
-  height: 100%;
-}
-.btn {
-  display: flex;
-  justify-content: center;
-}
+  .gif,
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .btn {
+    display: flex;
+    justify-content: center;
+  }
 </style>

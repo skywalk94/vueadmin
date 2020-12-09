@@ -18,52 +18,52 @@
 </template>
 
 <script>
-import draggable from "vuedraggable";
-export default {
-  components: {
-    draggable,
-  },
-  data() {
-    return {
-      list1: [1, 2, 3, 4, 5, 6],
-      list2: [7, 8, 9, 10, 11, 12],
-    };
-  },
-  methods: {
-    load() {},
-  },
-};
+  import draggable from "vuedraggable";
+  export default {
+    components: {
+      draggable,
+    },
+    data() {
+      return {
+        list1: [1, 2, 3, 4, 5, 6],
+        list2: [7, 8, 9, 10, 11, 12],
+      };
+    },
+    methods: {
+      load() {},
+    },
+  };
 </script>
 
 <style scoped>
-.box {
-  padding: 30px;
-  display: flex;
-  justify-content: space-between;
-}
+  .box {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
 
-.piece {
-  width: 400px;
-  height: 100px;
-  background: cadetblue;
-  margin: 15px auto;
-}
+  .piece {
+    width: 400px;
+    height: 100px;
+    background: cadetblue;
+    margin: 15px auto;
+  }
 
-.row {
-  width: 40%;
-}
+  .row {
+    width: 40%;
+  }
 
-.block {
-  display: inline-block;
-  width: 150px;
-  height: 150px;
-  background: coral;
-  margin: 15px;
-}
+  .block {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background: coral;
+    margin: 15px;
+  }
 
-.block,
-.piece {
-  color: #fff;
-  text-align: center;
-}
+  .block,
+  .piece {
+    color: #fff;
+    text-align: center;
+  }
 </style>

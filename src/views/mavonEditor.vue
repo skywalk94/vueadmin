@@ -8,34 +8,34 @@
 </template>
 
 <script>
-import markDownEditor from "../component/markDownEditor";
-export default {
-  components: {
-    markDownEditor,
-  },
-  data() {
-    return {
-      content: "",
-    };
-  },
-  mounted() {},
-  methods: {
-    changeVal(e) {
-      this.content = e;
+  import markDownEditor from "../component/markDownEditor";
+  export default {
+    components: {
+      markDownEditor,
     },
+    data() {
+      return {
+        content: "",
+      };
+    },
+    mounted() {},
+    methods: {
+      changeVal(e) {
+        this.content = e;
+      },
 
-    getData() {
-      this.$notify({
-        title: "传输数据",
-        message: this.content,
-      });
+      getData() {
+        this.$notify({
+          title: "传输数据",
+          message: this.content,
+        });
+      },
     },
-  },
-};
+  };
 </script>
 
 <style lang="less" scoped>
-.editor {
-  max-height: 600px;
-}
+  .editor {
+    max-height: 600px;
+  }
 </style>
