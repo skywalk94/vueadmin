@@ -168,11 +168,17 @@ router.beforeEach((to, from, next) => {
       next({
         path: '/login'
       })
-      NProgress.done()
     }
   } else {
-    next()
+    if (to.path == '/login') {
+      next({
+        path: '/'
+      })
+    } else {
+      next()
+    }
   }
+  NProgress.done()
 })
 
 router.afterEach(() => {
