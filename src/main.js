@@ -10,9 +10,6 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
-import animate from "animate.css";
-Vue.use(animate);
-
 Vue.config.productionTip = false
 
 new Vue({
