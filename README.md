@@ -1,6 +1,7 @@
-# vueAdmin
-基于vue2.x+elementUI实现的后台管理系统
-这开源项目是非常适合初学者进行开发的
+## vue-admin
+基于vue2.x+element-ui实现的后台管理系统模板开箱包 
+
+只简单的配置项目环境 
 
 [预览地址vueAdmin](https://skywalk94.gitee.io/vue-admin)
 

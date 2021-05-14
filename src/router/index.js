@@ -7,6 +7,7 @@ VueRouter.prototype.push = function push(location) {
 }
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import Cookies from "js-cookie";
 
 Vue.use(VueRouter)
 
@@ -59,7 +60,13 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title;
   NProgress.start();
-  if (!localStorage.getItem("userInfo")) {
+  userLogin(to, from, next)
+  NProgress.done()
+})
+
+function userLogin(to, from, next) {
+  let user = Cookies.get('_userInfo')
+  if (!user) {
     if (to.path == '/login') {
       next()
     } else {
@@ -76,8 +83,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   }
-  NProgress.done()
-})
+}
 
 router.afterEach(() => {
   NProgress.done()

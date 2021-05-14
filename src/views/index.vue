@@ -10,7 +10,9 @@
       <info-panel @collapse="getCollapse"></info-panel>
       <div class="admin-main-view">
         <keep-alive>
-          <router-view />
+          <transition name="fade" mode="out-in">
+            <router-view />
+          </transition>
         </keep-alive>
       </div>
     </div>
@@ -25,6 +27,7 @@ export default {
     "info-panel": infoPanel,
     "menu-nav": menuNav,
   },
+
   data() {
     return {
       menuWidth: 200,
@@ -46,14 +49,27 @@ export default {
 
 <style lang="less" scoped>
 .admin {
-  overflow: hidden;
-
+  min-width: 1200px;
   &-main {
-    margin-left: 200px;
     transition: all 0.3s;
     &-view {
-      overflow-x: auto;
+      overflow-x: hidden;
     }
+  }
+
+  .fade-leave-active,
+  .fade-transform-enter-active {
+    transition: all 0.5s;
+  }
+
+  .fade-enter {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  .fade-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
   }
 }
 </style>
