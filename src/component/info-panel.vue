@@ -38,6 +38,7 @@
 
 <script>
 import tagNav from "./tag-nav";
+import Cookies from "js-cookie";
 export default {
   components: {
     "tag-nav": tagNav,
@@ -65,7 +66,7 @@ export default {
           });
           break;
         case 1:
-          localStorage.removeItem("userInfo");
+          Cookies.remove("_userInfo");
           this.$router.push({
             path: "/login",
           });
