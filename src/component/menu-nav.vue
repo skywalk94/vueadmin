@@ -108,17 +108,31 @@ export default {
   background: #304156;
   overflow-x: hidden;
   overflow-y: auto;
-  transition: all 0.3s;
   .el-menu {
     border-right: unset;
   }
-  .el-menu--collapse .el-submenu__title span {
+
+  /deep/ .el-menu--collapse .el-submenu__title span {
     display: none;
   }
-
-  .el-menu-vertical:not(.el-menu--collapse) {
+  /deep/ .el-menu-vertical:not(.el-menu--collapse) {
     width: 200px;
     min-height: 400px;
+  }
+  /deep/ .el-menu--collapse .el-submenu__icon-arrow {
+    display: none;
+  }
+  /deep/ .el-menu-item-group__title {
+    display: none;
+  }
+  /deep/ .el-submenu .el-menu-item:hover {
+    background-color: #001528 !important;
+  }
+  /deep/ .el-submenu .el-menu-item {
+    background-color: #1f2d3d !important;
+  }
+  /deep/ .el-menu-item.is-active {
+    background-color: #001528 !important;
   }
 }
 </style>
