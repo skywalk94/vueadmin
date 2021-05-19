@@ -28,9 +28,6 @@ axios.interceptors.response.use(
         }
     },
     error => {
-        Dialog.alert({
-            title: '提示',
-            message: '网络请求失败，请刷新重试',
-        })
+        alert("网络请求失败，请刷新重试")
     }
 );
